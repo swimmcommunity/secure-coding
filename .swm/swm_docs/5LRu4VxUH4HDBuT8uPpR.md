@@ -1,0 +1,25 @@
+# Passwords
+In the upcoming Units we will discuss passwords and how to deal with them. For that, we will also get to crack some passwords ourselves.
+
+Passwords are an important part of our lives - we have them almost everywhere, for every system.
+
+When someone has our password, they can impersonate us - and use our user / identity to perform actions. On some cases, the password will not be enough, but for the upcoming Units - we will focus on the passwords themselves.
+
+# Bruteforce
+(If you know what a bruteforce attack is, feel free to skip this step).
+
+Let us say that an attacker is faced with a well-known user and password interface:
+![image.png](https://firebasestorage.googleapis.com/v0/b/swimmio-content/o/repositories%2FqCAjeLJBCFTjhwWoTpZo%2Fimg%2Fd527c37f-9cd8-4ab8-8def-dc2749fc35a4.png?alt=media&token=6583499c-87a0-4299-be16-ecb38d59e1af)
+
+Let us further assume that the attacker wants to get access to the `admin` user.
+
+What can the attacker do?
+
+In fact - many things. The attacker can try to guess the password based on acquaintance with the specific user (if relevant).
+
+The attacker can also just try to guess. How would such a guess work?
+
+Let us say that the password is to a safe, with a password consisting of 4 digits.
+So the password can be anything from `0000` to `9999` inclusive. There are exactly 10,000 options. The attacker can simply try `0000`, then `0001`, then `0002` and so on.
+
+The same applies for passwords that consist of additional characters. The attacker can decide on an order (say `0`, `1`, ... through `9`, then `a`, `b`, ..., through `z`, and then `A`, `B`, ... through `Z`) - and start guessing.
