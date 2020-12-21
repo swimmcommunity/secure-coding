@@ -1,3 +1,5 @@
 {
-    "repo_id": "qCAjeLJBCFTjhwWoTpZo"
+    "repo_id": "qCAjeLJBCFTjhwWoTpZo",
+    "configuration": {"always_mark_done_when_tests_succeed":  true,
+        "show_swimm_files_automatically": true}
 }
