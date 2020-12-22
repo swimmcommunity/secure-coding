@@ -1,0 +1,42 @@
+{
+    "id": "EABNKO2lhvJkYqZr40Gl",
+    "name": "Hash Bruteforce with Python",
+    "dod": "Make the tests pass ",
+    "description": "The fact that someone stores a hashed form of the password doesn't make the password storage completely safe.\n\nIn this Unit, we will use the same bruteforce technique as before in order to crack a `sha256` hash.\n\n# What do we know about the passwords?\nEach password consists of 1-8 characters, where each character is one of `abcdefg`.\n\n# Guidelines\n* Use `bruteforce_generator` implemented in `simple_bruteforce`.\n* Implement `my_bruteforce(hash_to_break)`.",
+    "summary": "In this Unit we were able to crack a simple hash, when we had some prior knowledge about the password. What happens if the password is too long? And how do we protect against these attacks? We will see in future Units.",
+    "hunksOrder": [
+        "python/hash_bruteforce.py_0"
+    ],
+    "tests": [
+        "python3 -m doctest python/hash_bruteforce.py"
+    ],
+    "hints": [],
+    "play_mode": "handson",
+    "swimmPatch": {
+        "python/hash_bruteforce.py": {
+            "diffType": "MODIFIED",
+            "fileDiffHeader": "diff --git a/python/hash_bruteforce.py b/python/hash_bruteforce.py\nindex b868aa3..f02e144 100644\n--- a/python/hash_bruteforce.py\n+++ b/python/hash_bruteforce.py",
+            "hunks": [
+                {
+                    "swimmHunkMetadata": {
+                        "hunkComments": []
+                    },
+                    "hunkDiffLines": [
+                        "@@ -16,8 +16,4 @@",
+                        "     'ebdgafba'",
+                        "     \"\"\"",
+                        "     generator = bruteforce_generator('abcdefg', 1, 8)",
+                        "-    for current_password in generator:",
+                        "+    return",
+                        "-        if sha256(current_password.encode()).hexdigest() == hash_to_break:",
+                        "-            return current_password",
+                        "-",
+                        "-    print(\"The password was not found\")"
+                    ]
+                }
+            ]
+        }
+    },
+    "app_version": "0.3.0",
+    "file_version": "1.0.4"
+}
