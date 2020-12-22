@@ -4,8 +4,5 @@ However, this process can take time. Consider your implementation of a dictionar
 
 That isn't so efficient, is it?
 
-To make things shorter, attackers can rely on **Rainbow Tables**. From [Wikipedia](https://en.wikipedia.org/wiki/Rainbow_table):
-> A rainbow table is a precomputed table for caching the output of cryptographic hash functions, usually for cracking password hashes. 
-
-# Additional Resources
-* [Wikipedia - Rainbow Table](https://en.wikipedia.org/wiki/Rainbow_table)
+To make things shorter, attackers can rely on **Lookup Tables**. From [Crackstation - Hashing Security](https://crackstation.net/hashing-security.htm):
+> The general idea is to pre-compute the hashes of the passwords in a password dictionary and store them, and their corresponding password, in a lookup table data structure. A good implementation of a lookup table can process hundreds of hash lookups per second, even when they contain many billions of hashes.
