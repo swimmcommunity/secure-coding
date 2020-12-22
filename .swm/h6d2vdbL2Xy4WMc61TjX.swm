@@ -1,0 +1,44 @@
+{
+    "id": "h6d2vdbL2Xy4WMc61TjX",
+    "name": "Dictionary Attack with Python",
+    "dod": "Make the tests pass ",
+    "description": "In this Unit we will write a simple `sha256` cracker.\n\nAs mentioned before - there are many lists of frequently used passwords available online, and attackers use them in order to guess passwords. For this Unit, we will rely on [rockyou](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt).\n\nImplement `dictionary_attack(sha256_hash_to_break)` so that it receives a `sha256` hash of a password that's included in `rockyou.txt`, and finds its corresponding plaintext value.\n\n# Guidelines\n* Your solution does NOT have to be efficient, we will improve efficiency later.\n* Make sure you download [rockyou](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt) and set `ROCKYOU_PATH` to point to it.",
+    "summary": "",
+    "hunksOrder": [
+        "python/hash_dictionary.py_0"
+    ],
+    "tests": [
+        "python3 -m doctest python/hash_dictionary.py"
+    ],
+    "hints": [],
+    "play_mode": "handson",
+    "swimmPatch": {
+        "python/hash_dictionary.py": {
+            "diffType": "MODIFIED",
+            "fileDiffHeader": "diff --git a/python/hash_dictionary.py b/python/hash_dictionary.py\nindex 68d149c..2a0d3a0 100644\n--- a/python/hash_dictionary.py\n+++ b/python/hash_dictionary.py",
+            "hunks": [
+                {
+                    "swimmHunkMetadata": {
+                        "hunkComments": []
+                    },
+                    "hunkDiffLines": [
+                        "@@ -11,10 +11,6 @@",
+                        "     b'iloveyou'",
+                        "     \"\"\"",
+                        "     with open(ROCKYOU_PATH, 'rb') as dictionary_file:",
+                        "-        words_list = dictionary_file.readlines()",
+                        "+        pass",
+                        "-        for word in words_list:",
+                        "-            word = word.strip()",
+                        "-            if sha256(word).hexdigest() == sha256_hash_to_break:",
+                        "-                return word",
+                        " ",
+                        "     print(\"The password was not found\")"
+                    ]
+                }
+            ]
+        }
+    },
+    "app_version": "0.3.0",
+    "file_version": "1.0.4"
+}
