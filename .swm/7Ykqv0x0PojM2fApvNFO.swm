@@ -1,0 +1,47 @@
+{
+    "id": "7Ykqv0x0PojM2fApvNFO",
+    "name": "Python Requests",
+    "dod": "Make the tests pass ",
+    "description": "> Encryption in general is typically critical to the security of many applications. Using TLS can greatly increase security by guaranteeing the identity of the party you are communicating with. This is accomplished by one or both parties presenting trusted certificates during the connection initialization phase of TLS. ([source](https://bandit.readthedocs.io/en/latest/plugins/b501_request_with_no_cert_validation.html))\n\nYet, sometimes programmers make mistakes when dealing with APIs related to encryption in general, and to TLS in particular.\n\nIn this Unit, the creator of `requests.py` made some poor security considerations when creating her API.\n\nLuckily for us, Bandit can help us find the issues. Correct them!",
+    "summary": "Static analysis tools watch over us, and Bandit saved the day once again! 💪🏻",
+    "hunksOrder": [
+        "python/requests.py_0"
+    ],
+    "tests": [
+        "bandit -r python/requests.py"
+    ],
+    "hints": [],
+    "play_mode": "handson",
+    "swimmPatch": {
+        "python/requests.py": {
+            "diffType": "MODIFIED",
+            "fileDiffHeader": "diff --git a/python/requests.py b/python/requests.py\nindex f5b7790..83065e0 100644\n--- a/python/requests.py\n+++ b/python/requests.py",
+            "hunks": [
+                {
+                    "swimmHunkMetadata": {
+                        "hunkComments": []
+                    },
+                    "hunkDiffLines": [
+                        "@@ -3,12 +3,12 @@",
+                        " import ssl",
+                        " ",
+                        " def my_get(url):",
+                        "-    return requests.get(url)",
+                        "+    return requests.get(url, verify=False)",
+                        " ",
+                        " ",
+                        " def my_ssl_connection(remote_host):",
+                        "     context = ssl.create_default_context()",
+                        " ",
+                        "     with socket.create_connection((hostname, 443)) as sock:",
+                        "-        with context.wrap_socket(sock, server_hostname=hostname, ssl_version=ssl.PROTOCOL_SSLv23) as ssock:",
+                        "+        with context.wrap_socket(sock, server_hostname=hostname, ssl_version=ssl.PROTOCOL_SSLv3) as ssock:",
+                        "             print(ssock.version())"
+                    ]
+                }
+            ]
+        }
+    },
+    "app_version": "0.3.0",
+    "file_version": "1.0.4"
+}
