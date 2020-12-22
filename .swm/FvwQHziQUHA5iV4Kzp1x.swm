@@ -1,40 +1,40 @@
 {
     "id": "FvwQHziQUHA5iV4Kzp1x",
-    "name": "Python Over the Rainbow",
+    "name": "Lookup Python",
     "dod": "Make the tests pass ",
-    "description": "In this Unit we will improve our simple `sha256` cracker, and use a Rainbow Table.\n\nFor this Unit, we will also rely on [rockyou](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt).\n\nImplement `generate_rainbow_table` so that it receives a the path of a file with words, and creates a `dict` with the mapping of `{sha256(word): word}`.\n\n# Guidelines\n* You may want to use `strip` - make sure you perform `sha256` on the actual word.\n* Make sure you download [rockyou](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt) and set `ROCKYOU_PATH` to point to it.\n* For this Unit we will only take the first 10,000,000 words of `rockyou`.",
+    "description": "In this Unit we will improve our simple `sha256` cracker, and use a Lookup Table.\n\nFor this Unit, we will also rely on [rockyou](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt).\n\nImplement `generate_lookup_table` so that it receives a the path of a file with words, and creates a `dict` with the mapping of `{sha256(word): word}`.\n\n# Guidelines\n* You may want to use `strip` - make sure you perform `sha256` on the actual word.\n* Make sure you download [rockyou](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt) and set `ROCKYOU_PATH` to point to it.\n* For this Unit we will only take the first 10,000,000 words of `rockyou`.",
     "summary": "Rainbow tables allow attackers to quickly crack hashes. Actually, there are many rainbow tables online ([https://crackstation.net/](example)) that can be used - so attackers wouldn't really need to create one themselves.\n\nSo, what should we do? Storing the password as plaintext is a clear no-no, and storing it as a hash isn't good enough.\n\nOn the next step, we will see a solution.",
     "hunksOrder": [
-        "python/hash_rainbow.py_0"
+        "python/hash_lookup.py_0"
     ],
     "tests": [
-        "python3 -m python/hash_rainbow.py"
+        "python3 -m python/hash_lookup.py"
     ],
     "hints": [
         "Don't forget to use `strip`"
     ],
     "play_mode": "handson",
     "swimmPatch": {
-        "python/hash_rainbow.py": {
+        "python/hash_lookup.py": {
             "diffType": "MODIFIED",
-            "fileDiffHeader": "diff --git a/python/hash_rainbow.py b/python/hash_rainbow.py\nindex e90118a..86fa034 100644\n--- a/python/hash_rainbow.py\n+++ b/python/hash_rainbow.py",
+            "fileDiffHeader": "diff --git a/python/hash_lookup.py b/python/hash_lookup.py\nindex f273045..b3091d6 100644\n--- a/python/hash_lookup.py\n+++ b/python/hash_lookup.py",
             "hunks": [
                 {
                     "swimmHunkMetadata": {
                         "hunkComments": []
                     },
                     "hunkDiffLines": [
-                        "@@ -14,4 +14,3 @@",
+                        "@@ -14,4 +14,4 @@",
                         "     \"\"\"",
                         "     with open(ROCKYOU_PATH, 'rb') as dictionary_file:",
                         "         words_list = dictionary_file.readlines()[:VALUES_TO_READ]",
-                        "-        return {sha256(word.strip()).hexdigest(): word.strip() for word in words_list}"
+                        "-        return {sha256(word.strip()).hexdigest(): word.strip() for word in words_list}",
+                        "+        pass"
                     ]
                 }
             ]
         }
     },
     "app_version": "0.3.0",
-    "file_version": "1.0.4",
-    "last_commit_sha_for_swimm_patch": "1e38e2a4ed1ace5b6c8c14ddbfe16dec3d63d3e3"
+    "file_version": "1.0.4"
 }
