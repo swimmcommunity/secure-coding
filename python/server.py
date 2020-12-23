@@ -1,6 +1,6 @@
 import os
 import subprocess
-from flask import Flask, render_template, escape
+from flask import Flask, render_template, escape, request, send_file, abort
 app = Flask(__name__)
 
 @app.route('/')
@@ -33,10 +33,16 @@ def ping(server):
 def get_picture():
     image_name = request.args.get('image_name')
     if not image_name:
-        return 404
-    if not is_safe_path(os.getcwd(), path):
-        return 401
-    return send_file(os.path.join(os.getcwd(), image_name))
+        abort(404)
+    
+    base_dir = os.path.join(os.getcwd(), 'python', 'pictures')
+    file_path = os.path.join(base_dir, image_name)
+
+    if not os.path.exists(file_path):
+        abort(404)
+    if not is_safe_path(base_dir, file_path):
+        abort(403)
+    return send_file(file_path)
 
 @app.route('/link/<url>')
 def link(url):
