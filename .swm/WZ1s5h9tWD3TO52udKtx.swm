@@ -1,0 +1,44 @@
+{
+    "id": "WZ1s5h9tWD3TO52udKtx",
+    "name": "Flask Injection",
+    "dod": "Rewrite `ping` handler so it gets the job done without being vulnerable to command injection",
+    "description": "\n# Guidelines\n\n## Make sure the server is up\nMake sure you can run your server by using `python3 python/server.py`. Browse to `http://127.0.0.1:5000/` and validate that you get the `Hello from Swimm!` greeting message.\n\n## Understand the ping handler\nBrowse to this address:\n`http://127.0.0.1:5000/ping/8.8.8.8`\n\nThis will cause the server app to send a ping request to `8.8.8.8`, and then give you back the response.\n\n## Exploit\nThe `ping` handler is vulnerable to command injection.\n\nDon't change any code, and issue a request to the server by browsing to a URL that will give you back the result of `whoami` on the server side.\n\n## Fix\nRewrite the `ping` handler in a secure manner that doesn't allow for an injection of this sort.",
+    "summary": "When using `subprocess`, if you use `shell=True`, your code is extremely likely to be vulnerable.\n\nIn order to exploit this vulnerability, all the attacker needs to do is browse to:\n`http://127.0.0.1:5000/ping/8.8.8.8&&whoami`\n\nOnce again, Bandit was able to spot the vulnerability for us.\n\nCommand Injection can happen in many cases, and static analysis tools won't always get us covered. Make sure your handlers handle user input in a cautious manner!\n\n# Additional References\n* [OWASP - Command Injection](https://owasp.org/www-community/attacks/Command_Injection)\n\n",
+    "hunksOrder": [
+        "python/server.py_0"
+    ],
+    "tests": [
+        "bandit -r -ll python/server.py"
+    ],
+    "hints": [
+        "Do you have to use `shell=True`? I guess not..."
+    ],
+    "play_mode": "handson",
+    "swimmPatch": {
+        "python/server.py": {
+            "diffType": "MODIFIED",
+            "fileDiffHeader": "diff --git a/python/server.py b/python/server.py\nindex fd3d01d..bd8651b 100644\n--- a/python/server.py\n+++ b/python/server.py",
+            "hunks": [
+                {
+                    "swimmHunkMetadata": {
+                        "hunkComments": []
+                    },
+                    "hunkDiffLines": [
+                        "@@ -25,8 +25,7 @@",
+                        " ",
+                        " @app.route('/ping/<server>')",
+                        " def ping(server):",
+                        "-    args = ['ping', '-n', '1', server]",
+                        "+    return subprocess.check_output(f'ping -n 1 {server}', shell=True)",
+                        "-    return subprocess.check_output(args, shell=False)",
+                        " ",
+                        " ",
+                        " @app.route('/picture')"
+                    ]
+                }
+            ]
+        }
+    },
+    "app_version": "0.3.0",
+    "file_version": "1.0.4"
+}
