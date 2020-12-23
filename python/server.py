@@ -8,7 +8,7 @@ def hello_world():
     return 'Hello from Swimm!'
 
 
-@app.route("/hello/<name>")
+@app.route("/hello")
 def hello():
     name = request.args.get('name')
     return f'Hello {escape(name)}'
