@@ -1,0 +1,68 @@
+{
+    "id": "kkNfvK7GJrXzoyBpeRHe",
+    "name": "Flask Templates",
+    "dod": "",
+    "description": "This is a short intro to Flask's templates. If you are acquainted with them, feel free to move on.\n\nTemplates help you reuse visuals, and divide the business and presentation logic. You don’t want your app code mixed with graphical design code.\n\nIn this example we define a simple template within `hello_user.html`.\n\nTry it by browsing to `http://127.0.0.1:5000/user/<your_name>`, for example:\n![image.png](https://firebasestorage.googleapis.com/v0/b/swimmio-content/o/repositories%2FqCAjeLJBCFTjhwWoTpZo%2Fimg%2F8ff661d2-4af4-41cb-bbb4-d530e44c4662.png?alt=media&token=3d4a371d-5aec-41bf-9015-3dd2f54adfc9)\n\n\n# Additional References\n* [Flask Documentation - Templating](https://flask.palletsprojects.com/en/1.1.x/templating/)\n* [Flask Tutorial - Templates](https://pythonbasics.org/flask-tutorial-templates/)",
+    "summary": "",
+    "hunksOrder": [
+        "python/templates/hello_user.html_0",
+        "python/server.py_0"
+    ],
+    "tests": [],
+    "hints": [],
+    "play_mode": "walkthrough",
+    "swimmPatch": {
+        "python/templates/hello_user.html": {
+            "diffType": "MODIFIED",
+            "fileDiffHeader": "diff --git a/python/templates/hello_user.html b/python/templates/hello_user.html\nindex ead4f27..ead4f27 100644\n--- a/python/templates/hello_user.html\n+++ b/python/templates/hello_user.html",
+            "hunks": [
+                {
+                    "swimmHunkMetadata": {
+                        "hunkComments": [
+                            "We define the template and use `{{ variable }}`."
+                        ]
+                    },
+                    "hunkDiffLines": [
+                        "@@ -1,8 +1,0 @@",
+                        "-<html>\r",
+                        "-    <head>\r",
+                        "-        <title>{{ title }}</title>\r",
+                        "-    </head>\r",
+                        "-    <body>\r",
+                        "-        <h1>Hello {{ username }}</h1>\r",
+                        "-    </body>\r",
+                        "-</html>"
+                    ]
+                }
+            ]
+        },
+        "python/server.py": {
+            "diffType": "MODIFIED",
+            "fileDiffHeader": "diff --git a/python/server.py b/python/server.py\nindex c61c05c..c61c05c 100644\n--- a/python/server.py\n+++ b/python/server.py",
+            "hunks": [
+                {
+                    "swimmHunkMetadata": {
+                        "hunkComments": [
+                            "We then use `render_template` and pass arguments to it"
+                        ]
+                    },
+                    "hunkDiffLines": [
+                        "@@ -14,9 +14,6 @@",
+                        "     return f'Hello {escape(name)}'\r",
+                        " \r",
+                        " \r",
+                        "-@app.route('/user/<name>')\r",
+                        "-def hello_name_template(name):\r",
+                        "-    return render_template('hello_user.html', title='Welcome', username=name)\r",
+                        " \r",
+                        " \r",
+                        " def is_safe_path(basedir, path):\r"
+                    ]
+                }
+            ]
+        }
+    },
+    "app_version": "0.3.0",
+    "file_version": "1.0.4",
+    "last_commit_sha_for_swimm_patch": "5b1234eba39172551b5d5cb727c454cc9b336b7e"
+}
