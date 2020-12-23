@@ -2,7 +2,7 @@
     "id": "WZ1s5h9tWD3TO52udKtx",
     "name": "Flask Injection",
     "dod": "Rewrite `ping` handler so it gets the job done without being vulnerable to command injection",
-    "description": "\n# Guidelines\n\n## Make sure the server is up\nMake sure you can run your server by using `python3 python/server.py`. Browse to `http://127.0.0.1:5000/` and validate that you get the `Hello from Swimm!` greeting message.\n\n## Understand the ping handler\nBrowse to this address:\n`http://127.0.0.1:5000/ping/8.8.8.8`\n\nThis will cause the server app to send a ping request to `8.8.8.8`, and then give you back the response.\n\n## Exploit\nThe `ping` handler is vulnerable to command injection.\n\nDon't change any code, and issue a request to the server by browsing to a URL that will give you back the result of `whoami` on the server side.\n\n## Fix\nRewrite the `ping` handler in a secure manner that doesn't allow for an injection of this sort.",
+    "description": "\n# Guidelines\n\n## Make sure the server is up\nMake sure you can run your server by using `python3 python/server.py`. Browse to `http://127.0.0.1:5000/` and validate that you get the `Hello from Swimm!` greeting message.\n\n## Understand the ping handler\nBrowse to this address:\n`http://127.0.0.1:5000/ping/8.8.8.8`\n\nThis will cause the server app to send a ping request to `8.8.8.8`, and then give you back the response.\n\n## Exploit\nThe `ping` handler is vulnerable to command injection.\n\nDon't change any code, and issue a request to the server by browsing to a URL that will give you back the result of `whoami` on the server side.\n\n## Fix\nRewrite the `ping` handler in a secure manner that doesn't allow for an injection of this sort.\n\n**Note:** In case someone aims at a command injection - it is perfectly OK to respond with `500 - Internal Server Error`.",
     "summary": "When using `subprocess`, if you use `shell=True`, your code is extremely likely to be vulnerable.\n\nIn order to exploit this vulnerability, all the attacker needs to do is browse to:\n`http://127.0.0.1:5000/ping/8.8.8.8&&whoami`\n\nOnce again, Bandit was able to spot the vulnerability for us.\n\nCommand Injection can happen in many cases, and static analysis tools won't always get us covered. Make sure your handlers handle user input in a cautious manner!\n\n# Additional References\n* [OWASP - Command Injection](https://owasp.org/www-community/attacks/Command_Injection)\n\n",
     "hunksOrder": [
         "python/server.py_0"
@@ -40,5 +40,6 @@
         }
     },
     "app_version": "0.3.0",
-    "file_version": "1.0.4"
+    "file_version": "1.0.4",
+    "last_commit_sha_for_swimm_patch": "dbb1e7be86152dffe87df48d0e9c515eb6476d67"
 }
