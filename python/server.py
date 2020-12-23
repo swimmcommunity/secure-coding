@@ -44,9 +44,9 @@ def get_picture():
         abort(403)
     return send_file(file_path)
 
-@app.route('/link/<url>')
-def link(url):
-    return render_template('link.html', url=url)
+@app.route('/link/<user_name>')
+def link(user_name):
+    return render_template('link.html', user_name=user_name)
 
 
 if __name__ == '__main__':

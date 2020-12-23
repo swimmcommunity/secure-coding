@@ -3,6 +3,6 @@
         <title>Hello</title>
     </head>
     <body>
-        <h1>Click <a href="{{ url }}">here</a></h1>
+        <h1>Click <a href={{ url_for('hello_name_template', name=user_name) }}>here</a> to be greeted</h1>
     </body>
 </html>
