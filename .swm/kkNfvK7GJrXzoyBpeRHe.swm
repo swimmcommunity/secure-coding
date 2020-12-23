@@ -2,8 +2,8 @@
     "id": "kkNfvK7GJrXzoyBpeRHe",
     "name": "Flask Templates",
     "dod": "",
-    "description": "This is a short intro to Flask's templates. If you are acquainted with them, feel free to move on.\n\nTemplates help you reuse visuals, and divide the business and presentation logic. You don’t want your app code mixed with graphical design code.\n\nIn this example we define a simple template within `hello_user.html`.\n\nTry it by browsing to `http://127.0.0.1:5000/user/<your_name>`, for example:\n![image.png](https://firebasestorage.googleapis.com/v0/b/swimmio-content/o/repositories%2FqCAjeLJBCFTjhwWoTpZo%2Fimg%2F8ff661d2-4af4-41cb-bbb4-d530e44c4662.png?alt=media&token=3d4a371d-5aec-41bf-9015-3dd2f54adfc9)\n\n\n# Additional References\n* [Flask Documentation - Templating](https://flask.palletsprojects.com/en/1.1.x/templating/)\n* [Flask Tutorial - Templates](https://pythonbasics.org/flask-tutorial-templates/)",
-    "summary": "",
+    "description": "This is a short intro to Flask's templates. If you are acquainted with them, feel free to move on.\n\nTemplates help you reuse visuals, and divide the business and presentation logic. You don’t want your app code mixed with graphical design code.\n\nIn this example we define a simple template within `hello_user.html`.\n\nTry it by browsing to `http://127.0.0.1:5000/user/<your_name>`, for example:\n![image.png](https://firebasestorage.googleapis.com/v0/b/swimmio-content/o/repositories%2FqCAjeLJBCFTjhwWoTpZo%2Fimg%2F8ff661d2-4af4-41cb-bbb4-d530e44c4662.png?alt=media&token=3d4a371d-5aec-41bf-9015-3dd2f54adfc9)",
+    "summary": "Now you understand what templates are and how they're used. Next, we will see what happens when they're not used with the right care...\n\n# Additional References\n* [Flask Documentation - Templating](https://flask.palletsprojects.com/en/1.1.x/templating/)\n* [Flask Tutorial - Templates](https://pythonbasics.org/flask-tutorial-templates/)",
     "hunksOrder": [
         "python/templates/hello_user.html_0",
         "python/server.py_0"
@@ -64,5 +64,5 @@
     },
     "app_version": "0.3.0",
     "file_version": "1.0.4",
-    "last_commit_sha_for_swimm_patch": "5b1234eba39172551b5d5cb727c454cc9b336b7e"
+    "last_commit_sha_for_swimm_patch": "f6a78ce3c9b9d58a3c2416af2152e372131c4d82"
 }
