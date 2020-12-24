@@ -1,0 +1,113 @@
+{
+    "id": "JAqmVqZSUFMfJ50bM2D2",
+    "name": "Flask Templates XSS",
+    "dod": "",
+    "description": "When using Templates with Flask, we must be cautious, or otherwise - we allow a malicious attacker to inject code.\n",
+    "summary": "# Additional References\n* https://flask.palletsprojects.com/en/1.1.x/security/#cross-site-scripting-xss",
+    "hunksOrder": [
+        "python/server.py_0",
+        "python/templates/link.html_0",
+        "python/server.py_1",
+        "python/templates/secure_link.html_0"
+    ],
+    "tests": [],
+    "hints": [],
+    "play_mode": "walkthrough",
+    "swimmPatch": {
+        "python/server.py": {
+            "diffType": "MODIFIED",
+            "fileDiffHeader": "diff --git a/python/server.py b/python/server.py\nindex 58c1f25..58c1f25 100644\n--- a/python/server.py\n+++ b/python/server.py",
+            "hunks": [
+                {
+                    "swimmHunkMetadata": {
+                        "hunkComments": [
+                            "Here we define an innocent-looking handler with a template"
+                        ]
+                    },
+                    "hunkDiffLines": [
+                        "@@ -51,9 +51,6 @@",
+                        "     return render_template('secure_link.html', user_name=user_name)\r",
+                        " \r",
+                        " \r",
+                        "-@app.route('/link/<url>')\r",
+                        "-def link(url):\r",
+                        "-    return render_template('link.html', url=url)\r",
+                        " \r",
+                        " \r",
+                        " if __name__ == '__main__':\r"
+                    ]
+                },
+                {
+                    "swimmHunkMetadata": {
+                        "hunkComments": [
+                            "Now consider this other link"
+                        ]
+                    },
+                    "hunkDiffLines": [
+                        "@@ -46,9 +46,6 @@",
+                        " \r",
+                        "     return send_file(file_path)\r",
+                        " \r",
+                        "-@app.route('/secure_link/<user_name>')\r",
+                        "-def secure_link(user_name):\r",
+                        "-    return render_template('secure_link.html', user_name=user_name)\r",
+                        " \r",
+                        " \r",
+                        " @app.route('/link/<url>')\r"
+                    ]
+                }
+            ]
+        },
+        "python/templates/link.html": {
+            "diffType": "MODIFIED",
+            "fileDiffHeader": "diff --git a/python/templates/link.html b/python/templates/link.html\nindex f1e02ab..f1e02ab 100644\n--- a/python/templates/link.html\n+++ b/python/templates/link.html",
+            "hunks": [
+                {
+                    "swimmHunkMetadata": {
+                        "hunkComments": [
+                            "Yet within the template, we include the user's input within `<a href=\"\">`.",
+                            "This can lead to an XSS! Try it yourself - browse to `http://127.0.0.1:5000/link/javascript:alert('WOW')` and click on the link."
+                        ]
+                    },
+                    "hunkDiffLines": [
+                        "@@ -1,8 +1,7 @@",
+                        " <html>\r",
+                        "     <head>\r",
+                        "         <title>Hello</title>\r",
+                        "     </head>\r",
+                        "     <body>\r",
+                        "-        <h1>Click <a href=\"{{ url }}\">here</a></h1>\r",
+                        "     </body>\r",
+                        " </html>"
+                    ]
+                }
+            ]
+        },
+        "python/templates/secure_link.html": {
+            "diffType": "MODIFIED",
+            "fileDiffHeader": "diff --git a/python/templates/secure_link.html b/python/templates/secure_link.html\nindex 70c2371..70c2371 100644\n--- a/python/templates/secure_link.html\n+++ b/python/templates/secure_link.html",
+            "hunks": [
+                {
+                    "swimmHunkMetadata": {
+                        "hunkComments": [
+                            "Here we use `url_for`, to make sure no XSS is possible."
+                        ]
+                    },
+                    "hunkDiffLines": [
+                        "@@ -1,8 +1,7 @@",
+                        " <html>\r",
+                        "     <head>\r",
+                        "         <title>Hello</title>\r",
+                        "     </head>\r",
+                        "     <body>\r",
+                        "-        <h1>Click <a href={{ url_for('hello_name_template', name=user_name) }}>here</a> to be greeted</h1>\r",
+                        "     </body>\r",
+                        " </html>"
+                    ]
+                }
+            ]
+        }
+    },
+    "app_version": "0.3.0",
+    "file_version": "1.0.4"
+}
