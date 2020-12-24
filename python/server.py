@@ -46,9 +46,14 @@ def get_picture():
 
     return send_file(file_path)
 
-@app.route('/link/<user_name>')
-def link(user_name):
-    return render_template('link.html', user_name=user_name)
+@app.route('/secure_link/<user_name>')
+def secure_link(user_name):
+    return render_template('secure_link.html', user_name=user_name)
+
+
+@app.route('/link/<url>')
+def link(url):
+    return render_template('link.html', url=url)
 
 
 if __name__ == '__main__':
