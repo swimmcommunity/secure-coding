@@ -38,10 +38,12 @@ def get_picture():
     base_dir = os.path.join(os.getcwd(), 'python', 'pictures')
     file_path = os.path.join(base_dir, image_name)
 
-    if not os.path.exists(file_path):
-        abort(404)
     if not is_safe_path(base_dir, file_path):
         abort(403)
+
+    if not os.path.exists(file_path):
+        abort(404)
+
     return send_file(file_path)
 
 @app.route('/link/<user_name>')
