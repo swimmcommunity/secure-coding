@@ -22,9 +22,11 @@ The following request and response is an example of a successful attack:
 `http://127.0.0.1/delete.php?filename=bob.txt;id`
 
 ## Response
-```Please specify the name of the file to delete
+```
+Please specify the name of the file to delete
 
-uid=33(www-data) gid=33(www-data) groups=33(www-data)```
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+```
 
 ## Explanation
 By using `bob.txt;id` as the `filename`, the attacker was able to launch the following command:
