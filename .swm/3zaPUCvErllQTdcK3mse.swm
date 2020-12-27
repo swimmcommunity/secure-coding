@@ -1,0 +1,74 @@
+{
+    "id": "3zaPUCvErllQTdcK3mse",
+    "name": "Flask Redirect",
+    "dod": "Rewrite the `redirect_me` handler so that it validates redirects",
+    "description": "# Make sure the server is up\nMake sure you can run your server by using `python3 python/server.py`. Browse to `http://127.0.0.1:5000/` and validate that you get the `Hello from Swimm!` greeting message.\n\n# Understand the redirect_mer handler\nThe `redirect_me` handler reads the `next` parameter and redirects the user to this address.\n\nTry to browse to `http://127.0.0.1:5000/redirect_me?next=http://127.0.0.1:5000/`\n\nYou will be redirected to `http://127.0.0.1:5000/`.\n\n# Exploit\nThe `redirect_me` does not validate redirects.\n\nTherefore, the exploitation is trivial. If we send someone a link to:\n`http://127.0.0.1:5000/redirect_me?next=OUR_ADDRESS`\nThey will be redirected to `OUR_ADDRESS`, no matter what it is.\n\n# Fix\nRewrite the `redirect_me` handler in a secure manner that doesn't allow for an injection of this sort.\n\nSpecifically, make sure that it only allows redirects for URLs starting with `http://` or `https://`, and only those starting with the right host part of the URL. Problematic redirect URLs should receive a `401` (unauthorized) response.\n\nFor example:\n`http://127.0.0.1:5000/redirect_me?next=http://malicious_website.com`\nShould result in `401`.\n\nBut:\n`http://127.0.0.1:5000/redirect_me?next=http://127.0.0.1:5000/hello`\nShould indeed redirect to `http://127.0.0.1:5000/hello`.\n\n# Tip\nAs always - you can use `swimm hint` if you are not sure how to proceed",
+    "summary": "Such as other user input - URLs for redirection should be sanitized and not trusted.\n\nThe Django framework contains a [django.utils.http.is_safe_url](https://github.com/django/django/blob/93b3ef9b2e191101c1a49b332d042864df74a658/django/utils/http.py#L268) function that can be used to validate redirects without implementing a custom version.\n\n\n# Additional references\n* [Openstack - Unvalidated URL redirect](https://security.openstack.org/guidelines/dg_avoid-unvalidated-redirects.html)",
+    "hunksOrder": [
+        "python/server.py_0",
+        "python/server.py_1"
+    ],
+    "tests": [
+        "python3 -m pytest python/test_server.py"
+    ],
+    "hints": [
+        "`urllib.parse` may be helpful",
+        "specifically, `urllib.parse` has `urlparse` and `urljoin` - which may come in handy",
+        "flask's `request` object has `request.host_url`",
+        "https://security.openstack.org/guidelines/dg_avoid-unvalidated-redirects.html"
+    ],
+    "play_mode": "handson",
+    "swimmPatch": {
+        "python/server.py": {
+            "diffType": "MODIFIED",
+            "fileDiffHeader": "diff --git a/python/server.py b/python/server.py\nindex 959af9e..db4d440 100644\n--- a/python/server.py\n+++ b/python/server.py",
+            "hunks": [
+                {
+                    "swimmHunkMetadata": {
+                        "hunkComments": []
+                    },
+                    "hunkDiffLines": [
+                        "@@ -1,6 +1,5 @@",
+                        " import os",
+                        " import subprocess",
+                        "-from urllib.parse import urlparse, urljoin",
+                        " from flask import Flask, render_template, escape, request, send_file, abort, redirect",
+                        " app = Flask(__name__)",
+                        " "
+                    ]
+                },
+                {
+                    "swimmHunkMetadata": {
+                        "hunkComments": [
+                            "This implementation from openstack.org validates that the scheme is `http` or `https`, and that the target url is within the same host address as the current server"
+                        ]
+                    },
+                    "hunkDiffLines": [
+                        "@@ -62,19 +61,8 @@",
+                        "     url =  request.args.get('next')",
+                        "     if not url:",
+                        "         abort(404)",
+                        "-    if not is_safe_redirect_url(url):",
+                        "-        abort(401)",
+                        "     return redirect(url)",
+                        " ",
+                        " ",
+                        "-def is_safe_redirect_url(target):",
+                        "-    \"\"\"",
+                        "-    Based on https://security.openstack.org/guidelines/dg_avoid-unvalidated-redirects.html",
+                        "-    \"\"\"",
+                        "-    host_url = urlparse(request.host_url)",
+                        "-    redirect_url = urlparse(urljoin(request.host_url, target))",
+                        "-    return redirect_url.scheme in ('http', 'https') and host_url.netloc == redirect_url.netloc",
+                        "-",
+                        "-",
+                        " if __name__ == '__main__':",
+                        "     app.run()"
+                    ]
+                }
+            ]
+        }
+    },
+    "app_version": "0.3.0",
+    "file_version": "1.0.4"
+}
