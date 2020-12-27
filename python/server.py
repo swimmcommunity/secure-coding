@@ -1,6 +1,7 @@
 import os
 import subprocess
-from flask import Flask, render_template, escape, request, send_file, abort
+from urllib.parse import urlparse, urljoin
+from flask import Flask, render_template, escape, request, send_file, abort, redirect
 app = Flask(__name__)
 
 @app.route('/')
@@ -54,6 +55,25 @@ def secure_link(user_name):
 @app.route('/link/<url>')
 def link(url):
     return render_template('link.html', url=url)
+
+
+@app.route('/redirect_me')
+def redirect_me():
+    url =  request.args.get('next')
+    if not url:
+        abort(404)
+    if not is_safe_redirect_url(url):
+        abort(401)
+    return redirect(url)
+
+
+def is_safe_redirect_url(target):
+    """
+    Based on https://security.openstack.org/guidelines/dg_avoid-unvalidated-redirects.html
+    """
+    host_url = urlparse(request.host_url)
+    redirect_url = urlparse(urljoin(request.host_url, target))
+    return redirect_url.scheme in ('http', 'https') and host_url.netloc == redirect_url.netloc
 
 
 if __name__ == '__main__':
