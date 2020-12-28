@@ -11,3 +11,4 @@ We assume basic Python knowledge.
 
 # Setup
 * Have `python3` in your path launch Python 3. That is, you should be able to launch `python3` from the terminal.
+* Install the requirements for this playlist - using `pip install -r python/requirements.txt` or `pip3 install -r python/requirements.txt`
