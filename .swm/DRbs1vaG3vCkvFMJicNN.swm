@@ -2,7 +2,7 @@
     "id": "DRbs1vaG3vCkvFMJicNN",
     "name": "Vulnerable dependencies",
     "dod": "Make the tests pass by satisfying `safety`",
-    "description": "It is common practice to install packages from a list included in a requirements file (usually `requirements.txt`), optionally by running:\n`pip install -r requirements.txt`\n\nAfter starting this Unit (using the provided `swimm play` command) - the dependency file used for our project is problematic. Specifically, it relies on an old version of Flask which is affected by: unexpected memory usage - [CVE-2019-1010083](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1010083).\n\n# Dependency Checkers to the rescue!\n> A dependency checker is a tool that attempts to detect when updates are available for third party dependencies (libraries, frameworks, etc) used in your application due to publicly disclosed security vulnerabilities.\n([Source](https://securityguide.github.io/webapps/best-practices/dependency-check.html))\n\nDependency checkers should be run frequently to make sure our apps do not rely on libraries with known vulnerabilities. Many tools exist for that job - including [OWASP's dependency-check](https://owasp.org/www-project-dependency-check) and [Dependabot](https://dependabot.com/).\n\nIn this example, we can use [Safety](https://pyup.io/safety/) - a free and open source tool.\n\nIf we run `safety check -r python/dependency_requirements.txt`, we will see that `Safety` recognizes that our version of Flask is vulnerable.\n\nUpdate the dependency!\n\n# Setup Required\n* Install [Safety](https://pyup.io/safety/) by running:\n`pip install safety`",
+    "description": "It is common practice to install packages from a list included in a requirements file (usually `requirements.txt`), optionally by running:\n`pip install -r requirements.txt`\n\nAfter starting this Unit (using the provided `swimm play` command) - the dependency file used for our project is problematic. Specifically, it relies on an old version of Flask which is affected by: unexpected memory usage - [CVE-2019-1010083](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1010083).\n\n# Dependency Checkers to the rescue!\n> A dependency checker is a tool that attempts to detect when updates are available for third party dependencies (libraries, frameworks, etc) used in your application due to publicly disclosed security vulnerabilities.\n([Source](https://securityguide.github.io/webapps/best-practices/dependency-check.html))\n\nDependency checkers should be run frequently to make sure our apps do not rely on libraries with known vulnerabilities. Many tools exist for that job - including [OWASP's dependency-check](https://owasp.org/www-project-dependency-check) and [Dependabot](https://dependabot.com/).\n\nIn this example, we can use [Safety](https://pyup.io/safety/) - a free and open source tool.\n\nIf we run `safety check -r python/dependency_requirements.txt`, we will see that `Safety` recognizes that our version of Flask is vulnerable.\n\nUpdate the dependency!\n\n# Setup Required\n* If you haven't installed the requirements for this playlist, please install [Safety](https://pyup.io/safety/) by running:\n`pip install safety`",
     "summary": "We should always use dependency checkers to make sure our code does not rely on vulnerable libraries. Make sure you integrate a dependency checker to your CI.",
     "hunksOrder": [
         "python/dependency_requirements.txt_0"
@@ -32,7 +32,6 @@
             ]
         }
     },
-    "app_version": "0.3.0",
-    "file_version": "1.0.4",
-    "last_commit_sha_for_swimm_patch": "4824a1f58a071b8c7543fb0c0a558048d9806b02"
+    "app_version": "0.3.1",
+    "file_version": "1.0.4"
 }
