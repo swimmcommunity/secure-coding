@@ -8,7 +8,7 @@
         "python/hash_lookup.py_0"
     ],
     "tests": [
-        "python3 -m python/hash_lookup.py"
+        "python3 -m doctest python/hash_lookup.py"
     ],
     "hints": [
         "Don't forget to use `strip`"
