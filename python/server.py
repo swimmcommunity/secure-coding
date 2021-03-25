@@ -1,5 +1,6 @@
 import os
 import subprocess
+import platform
 from urllib.parse import urlparse, urljoin
 from flask import Flask, render_template, escape, request, send_file, abort, redirect
 app = Flask(__name__)
@@ -24,9 +25,16 @@ def is_safe_path(basedir, path):
   return os.path.abspath(path).startswith(basedir)
 
 
+def get_ping_number_of_attempts_flag():
+    if platform.system() == 'Windows':
+        return '-n'
+    return '-c'
+
+
 @app.route('/ping/<server>')
 def ping(server):
-    args = ['ping', '-n', '1', server]
+    number_of_attempts_flag = get_ping_number_of_attempts_flag()
+    args = ['ping', number_of_attempts_flag, '1', server]
     return subprocess.check_output(args, shell=False)
 
 
