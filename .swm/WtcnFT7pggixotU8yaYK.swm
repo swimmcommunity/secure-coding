@@ -1,0 +1,16 @@
+{
+    "id": "WtcnFT7pggixotU8yaYK",
+    "name": "Static Analysis to the Rescue!",
+    "content": [
+        {
+            "type": "text",
+            "text": "Static Application Security Testing (SAST) Tools are tools that perform static code analysis in order to to find known security flaws in source code.\n\nThe use of SAST tools has gained popularity thanks to many aspects. Most importantly, it scales well - it can run quickly on lots of source code files, and if one researcher is able to sign a known vulnerability - you will also be prompted if it appears in your code.\nAlso, these tools' output is designed for developers – it usually highlights the precise affected location and even provides suggestions.\n\n# Additional References\n* [OWASP - Source Code Analysis Tools](https://owasp.org/www-community/Source_Code_Analysis_Tools)\n* [OWASP - Static Code Analysis](https://owasp.org/www-community/controls/Static_Code_Analysis)"
+        }
+    ],
+    "symbols": {},
+    "file_version": "2.0.3",
+    "meta": {
+        "app_version": "0.5.5-0",
+        "file_blobs": {}
+    }
+}
